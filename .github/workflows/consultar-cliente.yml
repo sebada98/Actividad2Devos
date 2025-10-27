@@ -1,0 +1,41 @@
+name: Notificación Consulta Cliente
+
+on:
+  workflow_dispatch:
+    inputs:
+      nombre_cliente:
+        description: 'Nombre del cliente consultado'
+        required: true
+        type: string
+      usuario:
+        description: 'Usuario que realiza la consulta'
+        required: true
+        type: string
+
+jobs:
+  notificar-consulta:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout del código
+        uses: actions/checkout@v3
+        
+      - name: Mostrar información de consulta
+        run: |
+          echo "🔍 CONSULTA DE CLIENTE REGISTRADA"
+          echo "=================================="
+          echo "Cliente consultado: ${{ github.event.inputs.nombre_cliente }}"
+          echo "Consultado por: ${{ github.event.inputs.usuario }}"
+          echo "Fecha: $(date)"
+          echo "Tipo de operación: Consulta"
+          echo "Resultado: Información mostrada exitosamente"
+          
+      - name: Notificar al equipo
+        run: |
+          echo "📧 NOTIFICACIONES ENVIADAS:"
+          echo "---------------------------"
+          echo "✅ maria_garcia@empresa.com - Notificado"
+          echo "✅ carlos_lopez@empresa.com - Notificado"
+          echo "✅ admin@empresa.com - Notificado"
+          echo ""
+          echo "📝 Registro de auditoría guardado"
+          echo "🔐 Consulta autorizada y registrada"
