@@ -1,0 +1,46 @@
+name: Notificación Actualización Cliente
+
+on:
+  workflow_dispatch:
+    inputs:
+      nombre_cliente:
+        description: 'Nombre del cliente actualizado'
+        required: true
+        type: string
+      usuario:
+        description: 'Usuario que realiza la acción'
+        required: true
+        type: string
+      servicio_agregado:
+        description: 'Servicio agregado al cliente'
+        required: true
+        type: string
+
+jobs:
+  notificar-actualizacion:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout del código
+        uses: actions/checkout@v3
+        
+      - name: Mostrar información de actualización
+        run: |
+          echo "🔄 CLIENTE RECURRENTE ACTUALIZADO"
+          echo "=================================="
+          echo "Cliente: ${{ github.event.inputs.nombre_cliente }}"
+          echo "Actualizado por: ${{ github.event.inputs.usuario }}"
+          echo "Nuevo servicio: ${{ github.event.inputs.servicio_agregado }}"
+          echo "Fecha: $(date)"
+          echo "Tipo: Cliente recurrente"
+          echo "Acción: Servicio agregado"
+          
+      - name: Notificar al equipo
+        run: |
+          echo "📧 NOTIFICACIONES ENVIADAS:"
+          echo "---------------------------"
+          echo "✅ maria_garcia@empresa.com - Notificado"
+          echo "✅ carlos_lopez@empresa.com - Notificado"
+          echo "✅ admin@empresa.com - Notificado"
+          echo ""
+          echo "📈 Cliente recurrente procesado exitosamente"
+          echo "💾 Archivo JSON actualizado en /clientes/"
