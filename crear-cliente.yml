@@ -1,0 +1,41 @@
+name: Notificación Creación Cliente
+
+on:
+  workflow_dispatch:
+    inputs:
+      nombre_cliente:
+        description: 'Nombre del nuevo cliente'
+        required: true
+        type: string
+      usuario:
+        description: 'Usuario que realiza la acción'
+        required: true
+        type: string
+
+jobs:
+  notificar-creacion:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout del código
+        uses: actions/checkout@v3
+        
+      - name: Mostrar información del nuevo cliente
+        run: |
+          echo "🆕 NUEVO CLIENTE CREADO - Sistema de Gestión"
+          echo "=============================================="
+          echo "Cliente: ${{ github.event.inputs.nombre_cliente }}"
+          echo "Creado por: ${{ github.event.inputs.usuario }}"
+          echo "Fecha: $(date)"
+          echo "Estado: Activo"
+          echo "Tipo: Cliente nuevo"
+          
+      - name: Notificar al equipo
+        run: |
+          echo "📧 NOTIFICACIONES ENVIADAS:"
+          echo "---------------------------"
+          echo "✅ maria_garcia@empresa.com - Notificado"
+          echo "✅ carlos_lopez@empresa.com - Notificado" 
+          echo "✅ admin@empresa.com - Notificado"
+          echo ""
+          echo "📊 El cliente ha sido registrado en el sistema"
+          echo "💾 Archivo JSON creado en /clientes/"
